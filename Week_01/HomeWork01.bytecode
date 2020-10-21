@@ -1,0 +1,115 @@
+Classfile /Volumes/Transcend/project/own/JAVA-000/Week_01/HomeWork01.class
+  Last modified 2020-10-21; size 599 bytes
+  MD5 checksum 7d8d9f38ddedee07ed3cb60f3416a916
+  Compiled from "HomeWork01.java"
+public class HomeWork01
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #8.#19         // java/lang/Object."<init>":()V
+   #2 = Float              3.4f
+   #3 = Fieldref           #20.#21        // java/lang/System.out:Ljava/io/PrintStream;
+   #4 = String             #22            // hello world
+   #5 = Methodref          #23.#24        // java/io/PrintStream.println:(Ljava/lang/String;)V
+   #6 = Methodref          #23.#25        // java/io/PrintStream.println:(I)V
+   #7 = Class              #26            // HomeWork01
+   #8 = Class              #27            // java/lang/Object
+   #9 = Utf8               <init>
+  #10 = Utf8               ()V
+  #11 = Utf8               Code
+  #12 = Utf8               LineNumberTable
+  #13 = Utf8               main
+  #14 = Utf8               ([Ljava/lang/String;)V
+  #15 = Utf8               StackMapTable
+  #16 = Class              #28            // "[Ljava/lang/String;"
+  #17 = Utf8               SourceFile
+  #18 = Utf8               HomeWork01.java
+  #19 = NameAndType        #9:#10         // "<init>":()V
+  #20 = Class              #29            // java/lang/System
+  #21 = NameAndType        #30:#31        // out:Ljava/io/PrintStream;
+  #22 = Utf8               hello world
+  #23 = Class              #32            // java/io/PrintStream
+  #24 = NameAndType        #33:#34        // println:(Ljava/lang/String;)V
+  #25 = NameAndType        #33:#35        // println:(I)V
+  #26 = Utf8               HomeWork01
+  #27 = Utf8               java/lang/Object
+  #28 = Utf8               [Ljava/lang/String;
+  #29 = Utf8               java/lang/System
+  #30 = Utf8               out
+  #31 = Utf8               Ljava/io/PrintStream;
+  #32 = Utf8               java/io/PrintStream
+  #33 = Utf8               println
+  #34 = Utf8               (Ljava/lang/String;)V
+  #35 = Utf8               (I)V
+{
+  public HomeWork01();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 5: 0
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=8, args_size=1
+         0: iconst_1             //加载常量为1的值 压入栈
+         1: istore_1             //将栈中int值的常量存入局部变量1
+         2: iconst_2             //加载常量为2的值 压入栈
+         3: istore_2             //将栈中int值的常量存入局部变量2
+         4: iload_1              //目前栈为空 ，加载局部变量1
+         5: iload_2               //目前栈为空 ，加载局部变量2
+         6: iadd                  //执行加法
+         7: istore_3             //将栈中的值存入 局部变量3
+         8: lconst_1             //加载long类型 1的常量 压入栈
+         9: lstore        4            //将栈中long 值的常量存入局部变量4
+        11: ldc           #2                  // float 3.4f       float 3.4放入栈中
+        13: fstore        6               //存入 局部变量 6
+        15: iload_1                       //加载局部变量1 也就是a的值
+        16: iconst_1                    //加载常量的值1
+        17: if_icmpgt     28             //栈中两个值比较  如果栈顶比现在比的值大 就到28位置去
+        20: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        23: ldc           #4                  // String hello world
+        25: invokevirtual #5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        28: iconst_0                   //加载常量值0 押入栈
+        29: istore        7           //栈值 存入局部变量7
+        31: iload         7              //加载局部变量7
+        33: iconst_3                     //加载常量值 3
+        34: if_icmpge     46              //进行比较判断是否退出了循环 ，执行循环后语句 46
+        37: iinc          1, 1           //局部变量1 的值 加 1 a++
+        40: iinc          7, 1           //局部变量7的值 加1  i++
+        43: goto          31             //到 31位置 继续进行判断，循环
+        46: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        49: iload_1
+        50: invokevirtual #6                  // Method java/io/PrintStream.println:(I)V
+        53: return
+      LineNumberTable:
+        line 9: 0
+        line 10: 4
+        line 12: 8
+        line 13: 11
+        line 15: 15
+        line 16: 20
+        line 19: 28
+        line 20: 37
+        line 19: 40
+        line 22: 46
+        line 24: 53
+      StackMapTable: number_of_entries = 3
+        frame_type = 255 /* full_frame */
+          offset_delta = 28
+          locals = [ class "[Ljava/lang/String;", int, int, int, long, float ]
+          stack = []
+        frame_type = 252 /* append */
+          offset_delta = 2
+          locals = [ int ]
+        frame_type = 250 /* chop */
+          offset_delta = 14
+}
+SourceFile: "HomeWork01.java"
