@@ -1,6 +1,9 @@
 package io.github.candy.gateway.handler;
 
 
+import io.github.candy.gateway.filter.FilterHandler;
+import io.github.candy.gateway.filter.HeaderProxy;
+import io.github.candy.gateway.filter.ProxyUtils;
 import io.github.candy.gateway.proxy.httpclient.HttpOutboundHandler;
 import io.github.candy.gateway.proxy.httpclient4.HttpClient4OutBoundHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -17,11 +20,12 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter{
 
     private static Logger logger = LoggerFactory.getLogger(HttpInboundHandler.class);
     private final String proxyServer;
-    private HttpOutboundHandler handler;
+    private FilterHandler handler;
 
     public HttpInboundHandler(String proxyServer) {
         this.proxyServer = proxyServer;
-        handler = new HttpOutboundHandler(this.proxyServer);
+        handler = ProxyUtils.getProxy(HttpOutboundHandler.class);
+        handler.setBackendUrl(proxyServer);
     }
 
     @Override
@@ -32,6 +36,7 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter{
             handler.handle(fullRequest, ctx);
 
         }catch (Exception ex) {
+            ex.printStackTrace();
             ReferenceCountUtil.release(msg);
         }
 

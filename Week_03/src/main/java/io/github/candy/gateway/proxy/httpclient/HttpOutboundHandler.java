@@ -1,5 +1,7 @@
 package io.github.candy.gateway.proxy.httpclient;
 
+import io.github.candy.gateway.filter.AddHeader;
+import io.github.candy.gateway.filter.FilterHandler;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -31,7 +33,7 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 /**
  * Created by candy on 2020/11/2.
  */
-public class HttpOutboundHandler {
+public class HttpOutboundHandler implements FilterHandler{
 
 
     private CloseableHttpClient httpclient;
@@ -57,10 +59,35 @@ public class HttpOutboundHandler {
                 .build();
 
 
+    }
+
+    public HttpOutboundHandler() {
+
+        int cores = Runtime.getRuntime().availableProcessors() * 2;
+        long keepAliveTime = 1000;
+        int queueSize = 2048;
+        RejectedExecutionHandler handler = new ThreadPoolExecutor.CallerRunsPolicy();
+        proxyService = new ThreadPoolExecutor(cores, cores,
+                keepAliveTime, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(queueSize),
+                new NamedThreadFactory("proxyService"), handler);
+
+
+        httpclient = HttpClients.custom().setMaxConnTotal(40)
+                .setMaxConnPerRoute(8)
+                .setKeepAliveStrategy((response,context) -> 6000)
+                .build();
 
 
     }
 
+    @Override
+    public void setBackendUrl(String backendUrl) {
+        this.backendUrl = backendUrl.endsWith("/")?backendUrl.substring(0,backendUrl.length()-1):backendUrl;
+    }
+
+    @Override
+    @AddHeader(name="nio", value = "candyYu")
+    @AddHeader(name="helo", value = "world")
     public void handle(final FullHttpRequest fullRequest, final ChannelHandlerContext ctx) {
         //透传fullRequest给proxyServer
         //可以附加上head等添加各种想要的aop
@@ -97,6 +124,7 @@ public class HttpOutboundHandler {
                 while (iterator.hasNext()) {
                     Map.Entry<String,String> entry = iterator.next();
                     httpGet.addHeader(entry.getKey(), entry.getValue());
+                    System.out.println(entry);
                 }
             }
             // 执行请求
