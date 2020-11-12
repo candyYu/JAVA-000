@@ -1,5 +1,24 @@
 学习笔记
 
+## 作业一
+
+作业要求
+2.（必做）思考有多少种方式，在 main 函数启动一个新线程，运行一个方法，拿到这个方法的返回值后，退出主线程？写出你的方法，越多越好，提交到 Github。
+
+Homework03.java 实现了7种方式
+
+线程之间的协作通信方式
+1.基本thread.join  synchronized锁  wait notify机制
+2.并发工具包 Lock ReentrantLock CycleBarrier Semaphore
+3.线程池   lamanda  Future FutureTask CompleteFuture等
+
+
+## 作业二
+作业要求
+4.（必做）把多线程和并发相关知识带你梳理一遍，画一个脑图，截图上传到 Github 上。 可选工具：xmind，百度脑图，wps，MindManage 或其他。
+
+【脑图】(https://github.com/candyYu/JAVA-000/tree/main/Week_04/并发和多线程.png)
+
 ## 线程同步和异步
 
 线程之间需要并发访问同一资源，需要沟通，所以有了线程之间通信，有了同步概念
