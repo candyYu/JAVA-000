@@ -11,6 +11,10 @@
     <artifactId>http-client-demo</artifactId>
     <version>1.0</version>
 
+    <properties>
+        <java.version>8</java.version>
+    </properties>
+
     <dependencies>
         <!-- Apache Http Begin -->
         <dependency>
