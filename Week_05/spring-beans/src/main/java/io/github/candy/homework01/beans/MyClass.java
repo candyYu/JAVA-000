@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
  * Created by candy on 2020/11/19.
  */
 @Component("myClass")
-public class Class {
+public class MyClass {
 
     private String name;
 
