@@ -40,7 +40,7 @@
    `out_trade_no` VARCHAR(45) NULL COMMENT '外部交易订单号 如支付宝支付订单号',
    `location_details` VARCHAR(450) NULL COMMENT '地址详情\n',
    PRIMARY KEY (`id`))
- ENGINE = InnoDB;
+ ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
  
  
  -- -----------------------------------------------------
