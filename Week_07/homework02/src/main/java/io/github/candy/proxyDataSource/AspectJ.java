@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.Random;
@@ -14,13 +15,14 @@ import java.util.Random;
  * Created by candy on 2020/12/3.
  */
 @Aspect
+@Component
 @Slf4j
 public class AspectJ {
 
 
     @Pointcut("@annotation(io.github.candy.proxyDataSource.ReadOnly)")
     public void dataSourcePointCut() {
-        System.out.println("proxy");
+
     }
 
     @Around("dataSourcePointCut()")
@@ -34,12 +36,12 @@ public class AspectJ {
                 // 负载均衡，简单随即
                 final String slave = loadBalance();
                 System.out.println("随机：" + slave);
-                DynamicDataSourceContext.setRoutingDataSourceKey("slave");
+                DynamicDataSourceContext.setRoutingDataSourceKey(slave);
             }else{
-                DynamicDataSourceContext.setRoutingDataSourceKey("master");
+                DynamicDataSourceContext.setRoutingDataSourceKey(DataSourceConstant.MASTER);
             }
         }else{
-            DynamicDataSourceContext.setRoutingDataSourceKey("master");
+            DynamicDataSourceContext.setRoutingDataSourceKey(DataSourceConstant.MASTER);
         }
 
         try {
