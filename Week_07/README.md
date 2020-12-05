@@ -6,6 +6,8 @@
 
 ## 作业一 按自己设计的表结构，插入 100 万订单模拟数据，测试不同方式的插入效率
 
+见homework01
+
 三种方法 
 1. mysql statment insert循环执行
 2. 使用statement addBatch执行
@@ -20,4 +22,11 @@
 >statement batch 快了 1秒搞定
 >load file 好快，同样数据1万 2秒搞定
 >
->
+
+
+## 作业二  读写分离 - 动态切换数据源版本 1.0
+见homework02
+
+
+## 作业三  读写分离 - 数据库框架版本 2.0
+见homework03

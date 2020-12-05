@@ -9,7 +9,7 @@
 
 
     <groupId>io.github.candy</groupId>
-    <artifactId>dynam</artifactId>
+    <artifactId>dynamicDataSource</artifactId>
     <version>1.0</version>
 
     <parent>

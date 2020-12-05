@@ -1,0 +1,28 @@
+
+dataSources:
+  ds0: !!com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:33087/mydb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&allowLoadLocalInfile=true
+    username: root
+    password: root
+  ds1: !!com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:33088/mydb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&allowLoadLocalInfile=true
+    username: root
+    password: root
+  ds2: !!com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:33088/mydb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&allowLoadLocalInfile=true
+    username: root
+    password: root
+
+rules:
+  - !REPLICA_QUERY
+    dataSources:
+      ds_0:
+        primaryDataSourceName: ds0
+        replicaDataSourceNames: [ds1, ds2]
+        loadBalancerName: roundRobin
+    loadBalancers:
+      roundRobin:
+        type: ROUND_ROBIN
