@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one or more
+  ~ contributor license agreements.  See the NOTICE file distributed with
+  ~ this work for additional information regarding copyright ownership.
+  ~ The ASF licenses this file to You under the Apache License, Version 2.0
+  ~ (the "License"); you may not use this file except in compliance with
+  ~ the License.  You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.candy.mapper.MybatisOrderRepository">
+    <resultMap id="baseResultMap" type="io.github.candy.entity.Order">
+        <result column="id" property="orderId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="pay_price" property="payPrice" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="BIGINT"/>
+        <result column="location_details" property="locationDetails" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="pay_type" property="payType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <update id="createTableIfNotExists">
+        CREATE TABLE IF NOT EXISTS `order` (
+        `id` BIGINT AUTO_INCREMENT NOT NULL,
+        `user_id` INT NOT NULL,
+        `pay_price` BIGINT NOT NULL COMMENT '支付价格，单位厘',
+        `create_time` BIGINT NOT NULL COMMENT '参考老师建议，使用bigint来存储毫秒数',
+        `update_time` BIGINT NOT NULL,
+        `state` INT NOT NULL DEFAULT 1 COMMENT '订单状态 0-失效  1-创建 2-已付款 3-已退款 4-已发货\n',
+        `pay_type` TINYINT NOT NULL COMMENT '付款方式 1-支付宝 2-微信 3-银联',
+        `out_trade_no` VARCHAR(45) NULL COMMENT '外部交易订单号 如支付宝支付订单号',
+        `location_details` VARCHAR(450) NULL COMMENT '地址详情\n',
+         PRIMARY KEY (`id`))
+        ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+    </update>
+
+    <update id="truncateTable">
+        TRUNCATE TABLE `order`;
+    </update>
+
+    <update id="dropTable">
+        DROP TABLE IF EXISTS `order`;
+    </update>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="orderId">
+        INSERT INTO `order` (user_id, pay_price,create_time, update_time, `state`,pay_type,location_details) VALUES (#{userId,jdbcType=INTEGER}, #{payType,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, #{state,jdbcType=INTEGER},#{payType,jdbcType=INTEGER},#{locationDetails,jdbcType=VARCHAR});
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM `order` WHERE id = #{orderId,jdbcType=INTEGER};
+    </delete>
+
+    <select id="selectAll" resultMap="baseResultMap">
+        SELECT * FROM `order`;
+    </select>
+
+    <select id="selectRange" resultMap="baseResultMap">
+        SELECT * FROM `order` WHERE id BETWEEN 200000000000000000 AND 400000000000000000
+    </select>
+</mapper>
