@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Agent-Class: io.kimmking.rpcfx.demo.consumer.TestAgent
+Created-By: candy
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+Boot-Class-Path: javassist-3.27.0-GA.jar

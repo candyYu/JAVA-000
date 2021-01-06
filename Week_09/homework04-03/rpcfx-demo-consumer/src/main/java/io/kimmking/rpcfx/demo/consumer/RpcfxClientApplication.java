@@ -1,5 +1,6 @@
 package io.kimmking.rpcfx.demo.consumer;
 
+
 import io.kimmking.rpcfx.client.Rpcfx;
 import io.kimmking.rpcfx.demo.api.Order;
 import io.kimmking.rpcfx.demo.api.OrderService;
