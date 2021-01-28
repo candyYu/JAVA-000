@@ -21,8 +21,10 @@ public class HttpConsumer implements Consumer {
     @Override
     public KmqMessage poll(String topic) {
         String brokerUrl = properties.get("url").toString() + "/poll?topic=" + topic;
-        ResponseEntity<KmqMessage> response = restTemplate.getForEntity(brokerUrl, KmqMessage.class);
-        return response.getBody();
+//        JSONObject response = restTemplate.getForObject(brokerUrl, JSONObject.class);
+//        KmqMessage kmqMessage = restTemplate.getForObject(brokerUrl, KmqMessage.class);
+        ResponseEntity<KmqMessage> kmqMessage = restTemplate.getForEntity(brokerUrl,KmqMessage.class);
+        return kmqMessage.getBody();
     }
 
 }

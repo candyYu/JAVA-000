@@ -15,7 +15,7 @@ public class CandyDemo {
 
     public static void main(String[] args) {
 
-        int messageAmount = 1;//1000;
+        int messageAmount = 1000;
         String topic = "testTopic";
         
         
