@@ -2,6 +2,7 @@ package io.kimmking.kmq.demo;
 
 import io.kimmking.kmq.consume.Consumer;
 import io.kimmking.kmq.consume.HttpConsumer;
+import io.kimmking.kmq.core.KmqMessage;
 import io.kimmking.kmq.produce.HttpProducer;
 import io.kimmking.kmq.produce.Producer;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class CandyDemo {
         long start = System.currentTimeMillis();
 
         while (amount > 0) {
-            consumer.poll(topic);
+            KmqMessage message = consumer.poll(topic);
             amount -= 1;
         }
 
